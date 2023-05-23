@@ -3,16 +3,15 @@ import SearchBar from '../../components/SearchBar.jsx/index';
 import SongsList from '../../components/songs/index';
 
 function Home() {
-    const [artists, setArtists] = useState([
-        { artist: "Anna Zak", songs: [] },
-        
-    ]);
+    // songs are the SONGs of an artist that the user queried for.
+    const [songs, setSongs] = useState(null);
+
 
     return (
         <div>
             <h1>Home page</h1>
-            <SearchBar artists={artists} setArtists={setArtists}/>
-            <SongsList artists={artists}/>
+            <SearchBar setSongs={setSongs} onChange={()=>{}}/>
+            { songs ? <SongsList songs={songs}/> : null}
         </div>
     );
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 
-function SongCard() {
+function SongCard({id, title, duration, releaseYear}) {
     return (
         <div>
             <List type='Song'>
-                <li>ID</li>
-                <li>Title</li>
-                <li>Duration</li>
-                <li>release year</li>
+                <li>{id}</li>
+                <li>{title}</li>
+                <li>{duration}</li>
+                <li>{releaseYear}</li>
             </List>
             
         </div>

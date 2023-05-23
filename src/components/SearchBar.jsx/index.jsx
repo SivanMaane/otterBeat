@@ -1,22 +1,27 @@
 import React from "react";
+import {getSongsByArtist} from "../../apiService/artistsService.js";
 
-function SearchBar({ artists, setArtists }) {
+function SearchBar({setSongs}) {
+
+    // When a user writes something in the searchBar, update a variable
+    const [searchContent, setSearchContent] = useState("");
+
     const handleSearch = (event) => {
-        const searchTerm = event.target.value;
-        const updatedArtists = artists.map((artist) => {
-          return {
-            ...artist,
-            songs: artist.songs.filter((song) =>
-              song.title.toLowerCase().includes(searchTerm.toLowerCase())
-            ),
-          };
-        });
-        setArtists(updatedArtists);
+        const artistName = searchContent;
+        const songsByArtist = getSongsByArtist(artistName);
+
+        setSongs(songsByArtist);
       };
+
     return (
       <form>
-        <input type="text" placeholder="Search..." />
-        <button type="submit"><i className="fa fa-search">Submit</i></button>
+        <input type="text" placeholder="Search..."
+               onChange={(event) => {
+                   console.log("The search content is: ", event.target.value)
+                   setSearchContent(event.target.value)
+                }}
+        />
+        <button type="submit" onClick={handleSearch}><i className="fa fa-search">Submit</i></button>
       </form>
     );
   }
