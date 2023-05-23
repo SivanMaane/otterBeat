@@ -1,6 +1,6 @@
 // This function will make a GET request to the backend and receive and answer
 // containing all the songs from the artist with the passed name.
-export function getSongsByArtist(name: string) {
+export function getSongsByArtist(name) {
     // Sent request to the server with the artist's name.
     console.log("We are at the songByArtist request, at artistService, CURRENTLY ONLY mocking data.")
 

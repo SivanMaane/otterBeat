@@ -1,5 +1,7 @@
 import React from "react";
 import {getSongsByArtist} from "../../apiService/artistsService.js";
+import { useState } from 'react';
+
 
 function SearchBar({setSongs}) {
 
@@ -9,20 +11,21 @@ function SearchBar({setSongs}) {
     const handleSearch = (event) => {
         const artistName = searchContent;
         const songsByArtist = getSongsByArtist(artistName);
+        console.log('this are the songs: ', songsByArtist)
 
         setSongs(songsByArtist);
       };
 
     return (
-      <form>
+      <>
         <input type="text" placeholder="Search..."
                onChange={(event) => {
                    console.log("The search content is: ", event.target.value)
                    setSearchContent(event.target.value)
                 }}
         />
-        <button type="submit" onClick={handleSearch}><i className="fa fa-search">Submit</i></button>
-      </form>
+        <button onClick={handleSearch}><i className="fa fa-search">Submit</i></button>
+      </>
     );
   }
 
