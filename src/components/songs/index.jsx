@@ -1,7 +1,7 @@
 import React from 'react'
 import SongCard from './SongCard'
 
-function SongsList({songsObject}) {
+function SongsList({songsObject, favoriteList, setFavoriteList}) {
     console.log('this is the song : ', songsObject)
     return (
         <>
@@ -11,6 +11,8 @@ function SongsList({songsObject}) {
                                  duration={song.duration}
                                  releaseYear={song.releaseYear}
                                  title={song.title} 
+                                 favoriteList={favoriteList}
+                                 setFavoriteList={setFavoriteList}
                                 key={index}/>
             }): null}
         </>
