@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useState } from 'react'
 import { FaHeart } from 'react-icons/fa';
 
@@ -7,7 +7,15 @@ import { FaHeart } from 'react-icons/fa';
 
 function SongCard({id, title, duration, releaseYear, favoriteList, setFavoriteList}) {
         console.log("the favorite list is: ", favoriteList)
-        const isFavorite = favoriteList.includes(id)
+    // This variable will contain if the song is favorite or not.
+    // BUT this variable will be calculated only at the first render.
+        const [isFavorite, setIsFavorite] = useState(favoriteList.includes(id))
+
+        useEffect(()=> {
+            // If favoriteList is changed, the doSomeEffect
+             setIsFavorite(favoriteList.includes(id))
+        }, [favoriteList])
+
         const handleClick = () => {
             let newFavoriteList = []
                 // isFavorite ?
@@ -25,7 +33,7 @@ function SongCard({id, title, duration, releaseYear, favoriteList, setFavoriteLi
                 favoriteList.push(id)
                 // This will no work!
                 // Because I pass the same object (favoriteList will remain as favoriteList)
-                newFavoriteList = favoriteList
+                newFavoriteList = [...favoriteList]
 
                 // given an object list = [1,2,3]
                 // The syntax :    [...list] ==> [1,2,3]
@@ -34,7 +42,7 @@ function SongCard({id, title, duration, releaseYear, favoriteList, setFavoriteLi
                 // in memory.
 
 
-                setFavoriteList([...newFavoriteList])
+                setFavoriteList(newFavoriteList)
             }
 
             console.log("I AM going to set the favoriteList to:", newFavoriteList)
