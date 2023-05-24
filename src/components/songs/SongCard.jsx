@@ -9,10 +9,35 @@ function SongCard({id, title, duration, releaseYear, favoriteList, setFavoriteLi
         console.log("the favorite list is: ", favoriteList)
         const isFavorite = favoriteList.includes(id)
         const handleClick = () => {
-            const newFavoriteList = isFavorite ? favoriteList.filter((favoriteId) => {
-                return favoriteId !== id 
-            }) : favoriteList.push(id)
-            console.log('the new favorite list is: ', newFavoriteList)
+            let newFavoriteList = []
+                // isFavorite ?
+                //     favoriteList.filter((favoriteId) => {
+                //         return favoriteId !== id
+                //     })
+                //     :
+                //     // returns the id and not the array!
+                //     favoriteList.push(id)
+            if (isFavorite) {
+                newFavoriteList = favoriteList.filter((favoriteId) => {
+                        return favoriteId !== id
+                    })
+            } else {
+                favoriteList.push(id)
+                // This will no work!
+                // Because I pass the same object (favoriteList will remain as favoriteList)
+                newFavoriteList = favoriteList
+
+                // given an object list = [1,2,3]
+                // The syntax :    [...list] ==> [1,2,3]
+                // It will be the same elemnts inside the list
+                // but the list will defer, they will point to a different place
+                // in memory.
+
+
+                setFavoriteList([...newFavoriteList])
+            }
+
+            console.log("I AM going to set the favoriteList to:", newFavoriteList)
             setFavoriteList(newFavoriteList)
 
         };
